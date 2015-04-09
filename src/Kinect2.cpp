@@ -1,38 +1,38 @@
 /*
-* 
+*
 * Copyright (c) 2014, Wieden+Kennedy
 * Stephen Schieberl
 * All rights reserved.
-* 
-* Redistribution and use in source and binary forms, with or 
-* without modification, are permitted provided that the following 
+*
+* Redistribution and use in source and binary forms, with or
+* without modification, are permitted provided that the following
 * conditions are met:
-* 
-* Redistributions of source code must retain the above copyright 
+*
+* Redistributions of source code must retain the above copyright
 * notice, this list of conditions and the following disclaimer.
-* Redistributions in binary form must reproduce the above copyright 
-* notice, this list of conditions and the following disclaimer in 
-* the documentation and/or other materials provided with the 
+* Redistributions in binary form must reproduce the above copyright
+* notice, this list of conditions and the following disclaimer in
+* the documentation and/or other materials provided with the
 * distribution.
-* 
-* Neither the name of the Ban the Rewind nor the names of its 
-* contributors may be used to endorse or promote products 
-* derived from this software without specific prior written 
+*
+* Neither the name of the Ban the Rewind nor the names of its
+* contributors may be used to endorse or promote products
+* derived from this software without specific prior written
 * permission.
-* 
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-* "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-* LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
-* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
-* COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
+*
+* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+* "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+* LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+* COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-* BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
-* LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
-* STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-* ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+* BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+* LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+* STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+* ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-* 
+*
 */
 
 #include "Kinect2.h"
@@ -46,17 +46,17 @@ using namespace ci;
 using namespace app;
 using namespace std;
 
-static const unsigned long kFaceFrameFeatures = 
-	FaceFrameFeatures::FaceFrameFeatures_BoundingBoxInColorSpace	| 
+static const unsigned long kFaceFrameFeatures =
+	FaceFrameFeatures::FaceFrameFeatures_BoundingBoxInColorSpace	|
 	FaceFrameFeatures::FaceFrameFeatures_PointsInColorSpace			|
-	FaceFrameFeatures::FaceFrameFeatures_RotationOrientation		| 
-	FaceFrameFeatures::FaceFrameFeatures_Happy						| 
-	FaceFrameFeatures::FaceFrameFeatures_RightEyeClosed				| 
-	FaceFrameFeatures::FaceFrameFeatures_LeftEyeClosed				| 
-	FaceFrameFeatures::FaceFrameFeatures_MouthOpen					| 
-	FaceFrameFeatures::FaceFrameFeatures_MouthMoved					| 
-	FaceFrameFeatures::FaceFrameFeatures_LookingAway				| 
-	FaceFrameFeatures::FaceFrameFeatures_Glasses					| 
+	FaceFrameFeatures::FaceFrameFeatures_RotationOrientation		|
+	FaceFrameFeatures::FaceFrameFeatures_Happy						|
+	FaceFrameFeatures::FaceFrameFeatures_RightEyeClosed				|
+	FaceFrameFeatures::FaceFrameFeatures_LeftEyeClosed				|
+	FaceFrameFeatures::FaceFrameFeatures_MouthOpen					|
+	FaceFrameFeatures::FaceFrameFeatures_MouthMoved					|
+	FaceFrameFeatures::FaceFrameFeatures_LookingAway				|
+	FaceFrameFeatures::FaceFrameFeatures_Glasses					|
 	FaceFrameFeatures::FaceFrameFeatures_FaceEngagement;
 
 Channel8u channel16To8( const Channel16u& channel, uint8_t bytes )
@@ -334,8 +334,8 @@ const Quatf& Body::Face2d::getRotation() const
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 Body::Face3d::Face3d()
-: IFace(), mColorHair( ColorA8u::hex( 0x00000000 ) ), mColorSkin( ColorA8u::hex( 0x00000000 ) ), 
-mFaceAlignmentQuality( FaceAlignmentQuality_Low ), mHeadPivotPoint( Vec3f::zero() ), 
+: IFace(), mColorHair( ColorA8u::hex( 0x00000000 ) ), mColorSkin( ColorA8u::hex( 0x00000000 ) ),
+mFaceAlignmentQuality( FaceAlignmentQuality_Low ), mHeadPivotPoint( Vec3f::zero() ),
 mScale( 0.0f )
 {
 	for ( size_t i = 0; i < (size_t)FaceShapeAnimations_Count; ++i ) {
@@ -416,14 +416,14 @@ HandState Body::Hand::getState() const
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 Body::Joint::Joint()
-: mOrientation( Quatf() ), mParentJoint( JointType::JointType_Count ), mPosition( Vec3f::zero() ), 
+: mOrientation( Quatf() ), mParentJoint( JointType::JointType_Count ), mPosition( Vec3f::zero() ),
 mTrackingState( TrackingState_NotTracked )
 {
 }
 
 Body::Joint::Joint( const Vec3f& position, const Quatf& orientation, TrackingState trackingState,
 	JointType parentJoint )
-: mOrientation( orientation ), mPosition( position ), mParentJoint( parentJoint ), 
+: mOrientation( orientation ), mPosition( position ), mParentJoint( parentJoint ),
 mTrackingState( trackingState )
 {
 }
@@ -451,8 +451,8 @@ TrackingState Body::Joint::getTrackingState() const
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 Body::Body()
-: mEngaged( DetectionResult_Unknown ), mId( 0 ), mIndex( 0 ), 
-mLean( Vec2f::zero() ), mLeanTrackingState( TrackingState_NotTracked ), 
+: mEngaged( DetectionResult_Unknown ), mId( 0 ), mIndex( 0 ),
+mLean( Vec2f::zero() ), mLeanTrackingState( TrackingState_NotTracked ),
 mRestricted( false ), mTracked( false )
 {
 	for ( size_t i = 0; i < (size_t)Activity_Count; ++i ) {
@@ -549,19 +549,19 @@ const Body::Hand& Body::getHandRight() const
 	return mHands[ 1 ];
 }
 
-uint64_t Body::getId() const 
-{ 
-	return mId; 
+uint64_t Body::getId() const
+{
+	return mId;
 }
 
-uint8_t Body::getIndex() const 
-{ 
-	return mIndex; 
+uint8_t Body::getIndex() const
+{
+	return mIndex;
 }
 
-const map<JointType, Body::Joint>& Body::getJointMap() const 
-{ 
-	return mJointMap; 
+const map<JointType, Body::Joint>& Body::getJointMap() const
+{
+	return mJointMap;
 }
 
 const Vec2f& Body::getLean() const
@@ -579,9 +579,9 @@ DetectionResult Body::isEngaged() const
 	return mEngaged;
 }
 
-bool Body::isTracked() const 
-{ 
-	return mTracked; 
+bool Body::isTracked() const
+{
+	return mTracked;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -599,7 +599,7 @@ long long Frame::getTimeStamp() const
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 CameraFrame::CameraFrame()
-: mFovDiagonal( 0.0f ), mFovHorizontal( 0.0f ), 
+: mFovDiagonal( 0.0f ), mFovHorizontal( 0.0f ),
 mFovVertical( 0.0f ), mSize( Vec2i::zero() )
 {
 }
@@ -627,7 +627,7 @@ const Vec2i& CameraFrame::getSize() const
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 AudioFrame::AudioFrame()
-	: mBeamAngle( 0.0f ), mBeamAngleConfidence( 0.0f ), mBuffer( nullptr ), 
+	: mBeamAngle( 0.0f ), mBeamAngleConfidence( 0.0f ), mBuffer( nullptr ),
 	mBufferSize( 0 )
 {
 }
@@ -667,13 +667,13 @@ WAVEFORMATEX AudioFrame::getFormat() const
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-template<typename T> 
+template<typename T>
 ChannelFrameT<T>::ChannelFrameT()
 : Frame()
 {
 }
 
-template<typename T> 
+template<typename T>
 const ChannelT<T>& ChannelFrameT<T>::getChannel() const
 {
 	return mChannel;
@@ -715,7 +715,7 @@ const vector<Body>& BodyFrame::getBodies() const
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 Device::Process::Process()
-: mNewData( atomic<bool>( false ) ), mRunning( atomic<bool>( false ) ), 
+: mNewData( atomic<bool>( false ) ), mRunning( atomic<bool>( false ) ),
 mThreadCallback( nullptr )
 {
 }
@@ -757,12 +757,12 @@ DeviceRef Device::create()
 }
 
 Device::Device()
-	: mEnabledFaceTracking2d( false ), mEnabledFaceTracking3d( false ), 
-	mEnabledHandTracking( false ), mEnabledJointTracking( true ), 
-	mEventHandlerAudio( nullptr ), mEventHandlerBody( nullptr ), 
-	mEventHandlerBodyIndex( nullptr ), mEventHandlerColor( nullptr ), 
-	mEventHandlerDepth( nullptr ), mEventHandlerInfrared( nullptr ), 
-	mEventHandlerInfraredLongExposure( nullptr ), mKinect( KCB_INVALID_HANDLE ), 
+	: mEnabledFaceTracking2d( false ), mEnabledFaceTracking3d( false ),
+	mEnabledHandTracking( false ), mEnabledJointTracking( true ),
+	mEventHandlerAudio( nullptr ), mEventHandlerBody( nullptr ),
+	mEventHandlerBodyIndex( nullptr ), mEventHandlerColor( nullptr ),
+	mEventHandlerDepth( nullptr ), mEventHandlerInfrared( nullptr ),
+	mEventHandlerInfraredLongExposure( nullptr ), mKinect( KCB_INVALID_HANDLE ),
 	mSensor( nullptr )
 {
 	if ( sFaceModelIndexCount == 0 ) {
@@ -772,7 +772,7 @@ Device::Device()
 	if ( sFaceModelVertexCount == 0 ) {
 		GetFaceModelVertexCount( &sFaceModelVertexCount );
 	}
-	
+
 	for ( size_t i = 0; i < BODY_COUNT; ++i ) {
 		mFaceModelIndices[ i ].resize( sFaceModelIndexCount );
 		mFaceModelVertices[ i ].resize( sFaceModelVertexCount );
@@ -928,7 +928,7 @@ bool Device::isJointTrackingEnabled() const
 Vec2i Device::mapCameraToColor( const Vec3f& v ) const
 {
 	ColorSpacePoint p;
-	KCBMapCameraPointToColorSpace( mKinect, toCameraSpacePoint( v ), &p ); 
+	KCBMapCameraPointToColorSpace( mKinect, toCameraSpacePoint( v ), &p );
 	return Vec2i( toVec2f( p ) );
 }
 
@@ -952,7 +952,7 @@ vector<Vec2i> Device::mapCameraToColor( const vector<Vec3f>& v ) const
 Vec2i Device::mapCameraToDepth( const Vec3f& v ) const
 {
 	DepthSpacePoint p;
-	KCBMapCameraPointToDepthSpace( mKinect, toCameraSpacePoint( v ), &p ); 
+	KCBMapCameraPointToDepthSpace( mKinect, toCameraSpacePoint( v ), &p );
 	return Vec2i( toVec2f( p ) );
 }
 
@@ -978,7 +978,7 @@ Vec3f Device::mapDepthToCamera( const Vec2i& v, const Channel16u& depth ) const
 	CameraSpacePoint p;
 	if ( depth ) {
 		uint16_t d = depth.getValue( v );
-		KCBMapDepthPointToCameraSpace( mKinect, toDepthSpacePoint( v ), d, &p ); 
+		KCBMapDepthPointToCameraSpace( mKinect, toDepthSpacePoint( v ), d, &p );
 	}
 	return toVec3f( p );
 }
@@ -1028,7 +1028,7 @@ Surface32f Device::mapDepthToCameraTable() const
 	long hr			= GetDepthFrameToCameraSpaceTable( mKinect, &count, &table );
 	if ( SUCCEEDED( hr ) ) {
 		Surface32f::Iter iter = surface.getIter();
-		
+
 		size_t i = 0;
 		while ( iter.line() ) {
 			while ( iter.pixel() ) {
@@ -1048,7 +1048,7 @@ Vec2i Device::mapDepthToColor( const Vec2i& v, const Channel16u& depth ) const
 	ColorSpacePoint p;
 	if ( depth ) {
 		uint16_t d = depth.getValue( v );
-		KCBMapDepthPointToColorSpace( mKinect, toDepthSpacePoint( v ), d, &p ); 
+		KCBMapDepthPointToColorSpace( mKinect, toDepthSpacePoint( v ), d, &p );
 	}
 	return Vec2i( toVec2f( p ) );
 }
@@ -1116,7 +1116,7 @@ void Device::start()
 			process.mThreadCallback = [ & ]()
 			{
 				while ( process.mRunning ) {
-					if ( process.mNewData || mKinect == KCB_INVALID_HANDLE ) {
+					if ( process.mNewData || mKinect == KCB_INVALID_HANDLE || mEventHandlerAudio == nullptr ) {
 						this_thread::sleep_for( chrono::milliseconds( kThreadSleepDuration ) );
 						continue;
 					}
@@ -1155,12 +1155,13 @@ void Device::start()
 			process.mThreadCallback = [ & ]()
 			{
 				while ( process.mRunning ) {
-					if ( process.mNewData ) {
+					if (process.mNewData || mEventHandlerBody == nullptr)
+					{
 						this_thread::sleep_for( chrono::milliseconds( kThreadSleepDuration ) );
 						continue;
 					}
 
-					if ( mEventHandlerBody != nullptr && KCBIsFrameReady( mKinect, FrameSourceTypes_Body ) ) {		
+					if ( mEventHandlerBody != nullptr && KCBIsFrameReady( mKinect, FrameSourceTypes_Body ) ) {
 						BodyFrame frame;
 						int64_t timeStamp					= 0L;
 						IBody* kinectBodies[ BODY_COUNT ]	= { 0 };
@@ -1277,16 +1278,16 @@ void Device::start()
 													break;
 												}
 
-												Body::Joint joint( 
-													toVec3f( joints[ j ].Position ), 
-													toQuatf( jointOrientations[ j ].Orientation ), 
-													joints[ j ].TrackingState, 
+												Body::Joint joint(
+													toVec3f( joints[ j ].Position ),
+													toQuatf( jointOrientations[ j ].Orientation ),
+													joints[ j ].TrackingState,
 													parentJoint
 													);
 												body.mJointMap.insert( pair<JointType, Body::Joint>( static_cast<JointType>( j ), joint ) );
 											}
 										}
-										
+
 										PointF lean;
 										kinectBody->get_Engaged( &body.mEngaged );
 										kinectBody->get_Lean( &lean );
@@ -1294,7 +1295,7 @@ void Device::start()
 										kinectBody->get_TrackingId( &body.mId );
 
 										body.mLean = toVec2f( lean );
-										
+
 										DetectionResult activities[ Activity_Count ];
 										kinectBody->GetActivityDetectionResults( (UINT)Activity_Count, activities );
 										for ( size_t j = 0; j < (size_t)Activity_Count; ++j ) {
@@ -1339,10 +1340,10 @@ void Device::start()
 													if ( SUCCEEDED( hr ) && trackingIdValid != 0 ) {
 														IFaceFrameResult* faceFrameResult	= nullptr;
 														hr									= faceFrame->get_FaceFrameResult( &faceFrameResult );
-															
+
 														if ( SUCCEEDED( hr ) && faceFrameResult != nullptr ) {
 															body.mFace2d.mTracked = true;
-	
+
 															RectI faceRectColor = { 0 };
 															hr = faceFrameResult->get_FaceBoundingBoxInColorSpace( &faceRectColor );
 															if ( SUCCEEDED( hr ) ) {
@@ -1351,10 +1352,10 @@ void Device::start()
 
 															RectI faceRectInfrared = { 0 };
 															hr = faceFrameResult->get_FaceBoundingBoxInInfraredSpace( &faceRectInfrared );
-															if ( SUCCEEDED( hr ) ) {	
+															if ( SUCCEEDED( hr ) ) {
 																body.mFace2d.mBoundsInfrared = toRectf( faceRectInfrared );
 															}
-																
+
 															PointF facePointsColor[ FacePointType::FacePointType_Count ];
 															hr = faceFrameResult->GetFacePointsInColorSpace( FacePointType_Count, facePointsColor );
 															if ( SUCCEEDED( hr ) ) {
@@ -1362,7 +1363,7 @@ void Device::start()
 																	body.mFace2d.mPointsColor.push_back( toVec2f( facePointsColor[ j ] ) );
 																}
 															}
-																
+
 															PointF facePointsInfrared[ FacePointType::FacePointType_Count ];
 															hr = faceFrameResult->GetFacePointsInInfraredSpace( FacePointType_Count, facePointsInfrared );
 															if ( SUCCEEDED( hr ) ) {
@@ -1439,7 +1440,7 @@ void Device::start()
 																		body.mFace3d.mFaceShapeAnimations[ (FaceShapeAnimations)j ] = faceShapeAnimations[ j ];
 																	}
 																}
-																	
+
 																float faceShapeDeformations[ FaceShapeDeformations_Count ];
 																for ( size_t j = 0; j < FaceShapeDeformations_Count; ++j ) {
 																	faceShapeDeformations[ j ] = 0.0f;
@@ -1472,7 +1473,7 @@ void Device::start()
 																	if ( SUCCEEDED( hr ) ) {
 																		body.mFace3d.mScale = scale;
 																	}
-																	
+
 																	CameraSpacePoint headPivotPoint;
 																	hr = faceAlignment->get_HeadPivotPoint( &headPivotPoint );
 																	if ( SUCCEEDED( hr ) ) {
@@ -1492,7 +1493,7 @@ void Device::start()
 																			body.mFace3d.mMesh.appendVertices( &mFaceModelVertices[ i ][ 0 ], sFaceModelVertexCount );
 																		}
 																	}
-																	
+
 																	faceModel->Release();
 																	faceModel = nullptr;
 																}
@@ -1529,7 +1530,8 @@ void Device::start()
 			process.mThreadCallback = [ & ]()
 			{
 				while ( process.mRunning ) {
-					if ( process.mNewData || mKinect == KCB_INVALID_HANDLE ) {
+					if (process.mNewData || mKinect == KCB_INVALID_HANDLE || mEventHandlerBodyIndex == nullptr)
+					{
 						this_thread::sleep_for( chrono::milliseconds( kThreadSleepDuration ) );
 						continue;
 					}
@@ -1538,11 +1540,11 @@ void Device::start()
 						BodyIndexFrame frame;
 						KCBFrameDescription frameDescription;
 						int64_t timeStamp = 0L;
-		
+
 						long hr = KCBGetBodyIndexFrameDescription( mKinect, &frameDescription );
 						if ( SUCCEEDED( hr ) ) {
 							IBodyIndexFrame* bodyIndexFrame = nullptr;
-			
+
 							hr = KCBGetIBodyIndexFrame( mKinect, &bodyIndexFrame );
 							if ( SUCCEEDED( hr ) ) {
 								hr = bodyIndexFrame->get_RelativeTime( &timeStamp );
@@ -1574,7 +1576,8 @@ void Device::start()
 			process.mThreadCallback = [ & ]()
 			{
 				while ( process.mRunning ) {
-					if ( process.mNewData || mKinect == KCB_INVALID_HANDLE ) {
+					if (process.mNewData || mKinect == KCB_INVALID_HANDLE || mEventHandlerColor == nullptr)
+					{
 						this_thread::sleep_for( chrono::milliseconds( kThreadSleepDuration ) );
 						continue;
 					}
@@ -1583,11 +1586,11 @@ void Device::start()
 						ColorFrame frame;
 						KCBFrameDescription frameDescription;
 						int64_t timeStamp	= 0L;
-		
+
 						long hr = KCBGetColorFrameDescription( mKinect, ColorImageFormat_Bgra, &frameDescription );
 						if ( SUCCEEDED( hr ) ) {
 							IColorFrame* colorFrame = nullptr;
-			
+
 							frame.mFovDiagonal		= frameDescription.diagonalFieldOfView;
 							frame.mFovHorizontal	= frameDescription.horizontalFieldOfView;
 							frame.mFovVertical		= frameDescription.verticalFieldOfView;
@@ -1621,7 +1624,8 @@ void Device::start()
 			process.mThreadCallback = [ & ]()
 			{
 				while ( process.mRunning ) {
-					if ( process.mNewData || mKinect == KCB_INVALID_HANDLE ) {
+					if (process.mNewData || mKinect == KCB_INVALID_HANDLE || mEventHandlerDepth == nullptr)
+					{
 						this_thread::sleep_for( chrono::milliseconds( kThreadSleepDuration ) );
 						continue;
 					}
@@ -1630,7 +1634,7 @@ void Device::start()
 						DepthFrame frame;
 						KCBFrameDescription frameDescription;
 						int64_t timeStamp = 0L;
-		
+
 						long hr = KCBGetDepthFrameDescription( mKinect, &frameDescription );
 						if ( SUCCEEDED( hr ) ) {
 							IDepthFrame* depthFrame = nullptr;
@@ -1668,7 +1672,8 @@ void Device::start()
 			process.mThreadCallback = [ & ]()
 			{
 				while ( process.mRunning ) {
-					if ( process.mNewData || mKinect == KCB_INVALID_HANDLE ) {
+					if (process.mNewData || mKinect == KCB_INVALID_HANDLE || mEventHandlerInfrared== nullptr)
+					{
 						this_thread::sleep_for( chrono::milliseconds( kThreadSleepDuration ) );
 						continue;
 					}
@@ -1677,7 +1682,7 @@ void Device::start()
 						InfraredFrame frame;
 						KCBFrameDescription frameDescription;
 						int64_t timeStamp	= 0L;
-		
+
 						long hr = KCBGetInfraredFrameDescription( mKinect, &frameDescription );
 						if ( SUCCEEDED( hr ) ) {
 							IInfraredFrame* infraredFrame = nullptr;
@@ -1713,7 +1718,8 @@ void Device::start()
 			process.mThreadCallback = [ & ]()
 			{
 				while ( process.mRunning ) {
-					if ( process.mNewData || mKinect == KCB_INVALID_HANDLE ) {
+					if (process.mNewData || mKinect == KCB_INVALID_HANDLE || mEventHandlerInfraredLongExposure == nullptr)
+					{
 						this_thread::sleep_for( chrono::milliseconds( kThreadSleepDuration ) );
 						continue;
 					}
@@ -1723,7 +1729,7 @@ void Device::start()
 						KCBFrameDescription frameDescription;
 						Vec2i sz			= Vec2i::zero();
 						int64_t timeStamp	= 0L;
-		
+
 						long hr = KCBGetInfraredFrameDescription( mKinect, &frameDescription );
 						if ( SUCCEEDED( hr ) ) {
 							ILongExposureInfraredFrame* infraredLongExposureFrame = nullptr;
